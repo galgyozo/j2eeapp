@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>hu.sol.j2eeapp</groupId>
+	<artifactId>j2eeapp-main</artifactId>
+	<version>0.1</version>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.1.RELEASE</version>
+		<relativePath/>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<encoding>UTF-8</encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<hibernate.version>5.2.2.Final</hibernate.version>
+		<log4j.version>2.5</log4j.version>
+		<juplo.version>2.0.0</juplo.version>
+		<vaadin.version>8.3.1</vaadin.version>
+	</properties>
+
+	<modules>
+		<module>j2eeapp-public-client</module>
+		<module>j2eeapp-db</module>
+		<module>j2eeapp-service-portal</module>
+		<module>j2eeapp-service-layer</module>
+	</modules>
+	
+</project>

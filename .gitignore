@@ -1,0 +1,8 @@
+*.classpath
+*.project
+*.factorypath
+*/.settings
+*.settings
+*/.apt_generated
+*/target
+bootstrap_demo

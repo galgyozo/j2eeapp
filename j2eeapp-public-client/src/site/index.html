@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Users</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src='http://code.jquery.com/jquery-1.7.js'></script>
+</head>
+<body>
+
+	<div class="container">
+		<h2>Users</h2>
+		<p>List of users:</p>
+		<table class="table table-hover" id="users"
+			data-click-to-select="true">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th data-field="id" align="center">ID</th>
+					<th data-field="userName">USERNAME</th>
+					<th data-field="name">NAME</th>
+					<th data-field="email">EMAIL</th>
+					<th data-field="edit"></th>
+				</tr>
+			</thead>
+			<tbody id="matchData"></tbody>
+		</table>
+		<button type="button" class="btn btn-primary active"
+			data-toggle="modal" data-target="#createModal">Új
+			felhasználó felvitel</button>
+		<button type="button" class="btn btn-danger disabled">Kiválasztottak
+			törlése</button>
+	</div>
+
+	<!-- CREATE Modal -->
+	<div id="createModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Új felhasználó felvitel</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form" id="createForm"
+						method="post" action="http://localhost:8080/rest/createUser">
+						<fieldset>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">ID</label>
+								<div class="col-sm-3">
+									<input type="text" placeholder="ID" disabled="disabled"
+										class="form-control" name="id" id="id">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Felhasználó
+									név</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="Felhasználó név"
+										class="form-control" name="userName" id="userName">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Név</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="Név" class="form-control"
+										name="name" id="name">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">E-mail</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="E-mail" class="form-control"
+										name="email" id="email">
+								</div>
+							</div>
+
+
+
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="pull-right">
+										<button type="submit" class="btn btn-primary">Save</button>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- EDIT Modal -->
+	<div id="editModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Felhasználó szerkesztése</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form" id="editForm"
+						method="post" action="http://localhost:8080/rest/updateUser">
+						<fieldset>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">ID</label>
+								<div class="col-sm-3">
+									<input type="hidden" id="id_edit_dialog_hidden" name="id">
+									<input type="text" placeholder="ID" readonly="true"
+										class="form-control" id="id_edit_dialog">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Felhasználó
+									név</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="Felhasználó név"
+										class="form-control" name="userName" id="userName_edit_dialog">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Név</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="Név" class="form-control"
+										name="name" id="name_edit_dialog">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">E-mail</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="E-mail" class="form-control"
+										name="email" id="email_edit_dialog">
+								</div>
+							</div>
+
+
+
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="pull-right">
+										<button type="submit" class="btn btn-primary">Save</button>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function getService() {
+			$
+					.ajax({
+						type : 'Get',
+						url : 'http://localhost:8080/rest/getUserList',
+						success : function(data) {
+							var tr, td;
+							tbody = document.getElementById("matchData");
+
+							for (var i = 0; i < data.length; i++) {
+								tr = tbody.insertRow(tbody.rows.length);
+								td = tr.insertCell(tr.cells.length);
+								td.setAttribute("align", "center");
+								td.innerHTML = "<td><input type='checkbox' name='"+data[i].id+"'></td>";
+								td = tr.insertCell(tr.cells.length);
+								td.setAttribute("class", "row_i");
+								td.innerHTML = data[i].id;
+								td = tr.insertCell(tr.cells.length);
+								td.setAttribute("class", "row_u");
+								td.innerHTML = data[i].userName;
+								td = tr.insertCell(tr.cells.length);
+								td.setAttribute("class", "row_n");
+								td.innerHTML = data[i].name;
+								td = tr.insertCell(tr.cells.length);
+								td.setAttribute("class", "row_e");
+								td.innerHTML = data[i].email;
+								td = tr.insertCell(tr.cells.length);
+								td.setAttribute("class", "edit_row");
+								td.innerHTML = "<button type='button' class='btn btn-primary active'"
+										+ " onclick='editUserData("
+										+ data[i].id
+										+ ")'"
+										+ " data-toggle='modal' data-target='#editModal'>Szerkeszt</button>";
+
+							}
+
+						},
+						error : function(xhr, ajaxOptions, thrownError) {
+							console.log(xhr.status);
+							console.log(thrownError);
+						}
+					})
+		};
+
+		window.onload = getService;
+	</script>
+
+
+	<script>
+		function editUserData(id) {
+			$
+					.ajax({
+						type : 'Get',
+						url : 'http://localhost:8080/rest/getUserById?id=' + id,
+						success : function(data) {
+							document.getElementById('id_edit_dialog').value = data.id;
+							document.getElementById('id_edit_dialog_hidden').value = data.id;
+							document.getElementById('userName_edit_dialog').value = data.userName;
+							document.getElementById('name_edit_dialog').value = data.name;
+							document.getElementById('email_edit_dialog').value = data.email;
+						}
+					});
+		}
+	</script>
+
+</body>
+</html>
+
