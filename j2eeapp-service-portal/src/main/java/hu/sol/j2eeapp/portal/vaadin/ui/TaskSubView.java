@@ -52,6 +52,7 @@ public class TaskSubView extends VerticalLayout {
 	public TaskSubView(GetService getService, RegistrationService registrationService, UpdateService updateService,
 			DeleteService deleteService, User user) {
 		super();
+		
 		this.getService = getService;
 		this.registrationService = registrationService;
 		this.updateService = updateService;
@@ -62,7 +63,6 @@ public class TaskSubView extends VerticalLayout {
 		this.addComponent(createSortLayout());
 		this.addComponent(createTaskTable());
 		this.addComponent(createFunctionLayout());
-
 	}
 
 	private Component createSortLayout() {
@@ -125,8 +125,8 @@ public class TaskSubView extends VerticalLayout {
 		deleteSelectedTasksButton.setStyleName(ValoTheme.BUTTON_DANGER);
 
 		deleteSelectedTasksButton.addClickListener(event -> {
-			if (selected.isEmpty()) {
-				Notification.show("Select at least 1 task", Notification.TYPE_WARNING_MESSAGE)
+			if (selected == null || selected.isEmpty()) {
+				Notification.show("Select at least one task", Notification.TYPE_WARNING_MESSAGE)
 						.setPosition(Position.TOP_CENTER);
 			} else {
 

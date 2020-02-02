@@ -3,6 +3,7 @@ package hu.sol.j2eeapp.portal.vaadin.ui;
 import java.util.Objects;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.vaadin.data.Binder;
@@ -46,9 +47,11 @@ public class UsersSubView extends VerticalLayout {
 
 	private Grid<User> grid;
 
+	@Autowired
 	public UsersSubView(GetService getService, RegistrationService registrationService, UpdateService updateService,
 			DeleteService deleteService) {
 		super();
+		
 		this.getService = getService;
 		this.registrationService = registrationService;
 		this.updateService = updateService;
@@ -103,8 +106,8 @@ public class UsersSubView extends VerticalLayout {
 		deleteSelectedUsersButton.setStyleName(ValoTheme.BUTTON_DANGER);
 
 		deleteSelectedUsersButton.addClickListener(event -> {
-			if (selected.isEmpty()) {
-				Notification.show("Select at least 1 user", Notification.TYPE_WARNING_MESSAGE)
+			if (selected == null || selected.isEmpty()) {
+				Notification.show("Select at least one user", Notification.TYPE_WARNING_MESSAGE)
 						.setPosition(Position.TOP_CENTER);
 			} else {
 
